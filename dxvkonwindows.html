@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uchks</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="uchks" />
+    <meta property="og:description" content="writeups." />
+    <meta name="author" content="uchks" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css"
+    />
+    <style>
+      body {
+        background-color: #121212;
+        color: #fff;
+        margin: 0;
+        font-family: "gg mono", monospace;
+        font-size: small;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+      a:hover {
+        font-weight: 700;
+      }
+      p,
+      pre {
+        text-align: left;
+        margin: 0.5em auto;
+        max-width: 600px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      h2,
+      h3 {
+        margin-bottom: -10px;
+      }
+    </style>
+  </head>
+  <body>
+    <pre>
+            <h5><a href="javascript:history.back()"><- Back</a> 13/04/2024</h5><h2>dxvk on Windows</h2>
+DXVK is a translation layer that converts DirectX graphics into Vulkan, improving game performance on various systems. This guide explains how to use DXVK on Windows, especially useful for enhancing gameplay in DirectX 11 or lower games like <i>Grand Theft Auto IV</i>.
+<h3>Pre-requisites:</h3>
+• Windows
+• A game that utilizes DirectX 11 or lower 
+      <sub>p.s.a: use something like <a href="https://www.pcgamingwiki.com/wiki/Home">PCGamingWiki</a> to find this information. a very valuable resource.</sub>
+• <a href="https://gitlab.com/Ph42oN/dxvk-gplasync/-/releases">dxvk-gplasync</a>
+
+Using PCGamingWiki, in this instance I'm using <i>Grand Theft Auto IV</i>, look under the API section for details about the executable and whether it’s 32-bit or 64-bit, alongside the DirectX version. Download <a href="https://gitlab.com/Ph42oN/dxvk-gplasync/-/releases">dxvk-gplasync</a>, extract it. Inside will be two folders <i><b>'x32'</b></i> and <i><b>'x64'</b></i>. Choose the one matching your game's architecture, <i>Grand Theft Auto IV</i> is 32-bit.
+
+Inside will be four more files:
+<code>
+DirectX 9: <b>d3d9.dll</b>
+DirectX 10: <b>d3d10core.dll, d3d11.dll, dxgi.dll</b>
+DirectX 11: <b>d3d11.dll, dxgi.dll</b>
+</code>
+With this information in mind, go to the games parent directory, and copy the corresponding DirectX version files to said directory. For <i>Grand Theft Auto IV</i>, we'll be copying <b>d3d9.dll</b> to the directory. 
+Now, create a new file in the directory named <b>'dxvk.conf'</b>. Enter the following lines into the file:
+  <code>
+dxvk.enableAsync=true
+dxvk.gplAsyncCache=true
+</code>
+If you're interested in further dxvk configuration options, see the following: <a href="https://github.com/doitsujin/dxvk/blob/master/dxvk.conf">https://github.com/doitsujin/dxvk/blob/master/dxvk.conf</a>
+Now, start the game. DXVK will now translate DirectX calls to Vulkan, potentially improving performance.
+</pre>
+  </body>
+</html>
