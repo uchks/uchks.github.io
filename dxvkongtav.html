@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uchks</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="uchks" />
+    <meta property="og:description" content="writeups." />
+    <meta name="author" content="uchks" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: monospace;
+      }
+      .content {
+        margin: 0 auto;
+        padding: 150px;
+        width: 600px; /* Sets the width of the content block */
+        text-align: left; /* Aligns text to the left */
+      }
+      h2,
+      h3 {
+        margin: 10px 0 5px 0; /* Smaller bottom margin for headers */
+      }
+      p,
+      a,
+      li {
+        margin: 5px 0; /* Reduced vertical spacing between elements */
+      }
+      ul,
+      ol {
+        padding-left: 20px; /* Indentation for list items */
+        margin: 0 0 10px 0; /* Removes default margin from lists, adds bottom margin for space after list */
+      }
+      a {
+        color: inherit; /* Makes links the same color as regular text */
+        text-decoration: none; /* Removes underline from links */
+      }
+      a:hover {
+        color: #c0c0c0; /* Changes link color on hover */
+      }
+      code {
+        display: block; /* Puts code on its own line */
+        background-color: #1e1e1e; /* Dark background for code blocks */
+        padding: 5px; /* Adds some padding inside the code block */
+        margin: 5px 0; /* Consistent vertical spacing for code blocks */
+        border-left: 3px solid #333333; /* Adds a left border to code blocks */
+        color: #dcdcdc; /* Light grey text color for code */
+      }
+
+      /* Dark mode styles */
+      .dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      /* Light mode styles */
+      .light-mode {
+        background-color: #ffffff;
+        color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h5><a href="javascript:history.back()"><- Back</a> 13/04/2024</h5>
+      <h2>dxvk on GTA V</h2>
+      <p>
+        Grand Theft Auto V isn't typically compatible with DXVK when running on
+        Windows, but we're here to change that. With a few straightforward
+        steps, you'll have Grand Theft Auto V running under Vulkan in no time.
+      </p>
+      <h3>Pre-requisites:</h3>
+      <ul>
+        <li>Windows</li>
+        <li>
+          <a href="https://gitlab.com/Ph42oN/dxvk-gplasync/-/releases"
+            >dxvk-gplasync</a
+          >
+          - DXVK files
+        </li>
+        <li>
+          <a href="https://ntcore.com/explorer-suite/">CFF Explorer</a> - to
+          modify DLL files
+        </li>
+      </ul>
+      <p>
+        Using CFF Explorer, we will modify a DLL file to utilize imports from
+        DXVK. There have been reports of success with two different DLLs:
+      </p>
+      <code
+        >d3dcompiler_46.dll - Bundled with Grand Theft Auto V<br />D3DCompiler_43.dll
+        - Bundled with Windows (System32 directory)</code
+      >
+      <p>
+        <strong>Tip:</strong> Try this guide with <strong>both</strong> DLLs to
+        determine which works best for you. In this example, I'll use
+        <strong>D3DCompiler_43.dll</strong>, which was successful in my tests.
+      </p>
+      <h3>Step-by-Step Guide:</h3>
+      <ol>
+        <li>
+          <strong>Locate and Copy DLL:</strong> Navigate to your System32 folder
+          at C:/Windows/System32. Copy the
+          <strong>D3DCompiler_43.dll</strong> (if using d3dcompiler_46.dll, skip
+          this step).
+        </li>
+        <li>
+          <strong>Deleting the old DLL:</strong> Access the Grand Theft Auto V
+          directory by opening Steam, right-clicking on Grand Theft Auto V,
+          selecting "Manage," then "Browse local files." Here,
+          <strong>delete d3dcompiler_46.dll</strong> (if using
+          D3DCompiler_43.dll, otherwise skip) and paste the copied
+          D3DCompiler_43.dll.
+        </li>
+        <li>
+          <strong>Copy DXVK DLLs:</strong> Also, copy
+          <strong>d3d11.dll</strong> and <strong>dxgi.dll</strong> from the DXVK
+          package and paste them into the Grand Theft Auto V directory.
+        </li>
+        <li>
+          <strong>Modify DLL Imports:</strong> Open CFF Explorer and use the
+          "Open" icon to load D3DCompiler_43.dll from the Grand Theft Auto V
+          folder. Navigate to <strong>Import Adder</strong> and click Add.
+          Import all exported functions from the DXVK DLLs (d3d11.dll, dxgi.dll)
+          by name, one at a time. Once all functions are imported, click
+          "Rebuild Import Table."
+        </li>
+        <li>
+          <strong>Save Changes:</strong> Go to the file menu, save, and
+          overwrite the original DLL file.
+        </li>
+        <li>
+          <strong>Run the Game:</strong> Start Grand Theft Auto V, ensure your
+          DirectX version is set to 11, and enjoy the game.
+        </li>
+      </ol>
+    </div>
+    <script>
+        function toggleMode() {
+            if (document.body.classList.contains('dark-mode')) {
+              document.body.classList.remove('dark-mode');
+              document.body.classList.add('light-mode');
+              setCookie('user-prefers-dark', 'false', 7);
+            } else {
+              document.body.classList.remove('light-mode');
+              document.body.classList.add('dark-mode');
+              setCookie('user-prefers-dark', 'true', 7);
+            }
+          }
+          
+            // Function to set a cookie
+            function setCookie(name, value, days) {
+              var expires = "";
+              if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = "; expires=" + date.toUTCString();
+              }
+              document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+        
+            // Function to read a cookie
+            function getCookie(name) {
+              var nameEQ = name + "=";
+              var ca = document.cookie.split(";");
+              for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == " ") c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+              }
+              return null;
+            }
+        
+            // Check for saved user preference, if any, otherwise apply system preference
+            var userPrefersDark = getCookie("user-prefers-dark");
+            if (userPrefersDark === null) {
+              userPrefersDark =
+                window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches;
+            } else {
+              userPrefersDark = userPrefersDark === "true";
+            }
+        
+            // Apply the preference and set the cookie
+            if (userPrefersDark) {
+              document.body.classList.add("dark-mode");
+              setCookie("user-prefers-dark", "true", 7);
+            } else {
+              document.body.classList.remove("dark-mode");
+              setCookie("user-prefers-dark", "false", 7);
+            }
+          </script>
+  </body>
+</html>
