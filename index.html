@@ -55,16 +55,21 @@
       color: #dcdcdc; /* Light grey text color for code */
     }
 
-    /* Dark mode styles */
     .dark-mode {
       background-color: #121212;
       color: #ffffff;
     }
 
-    /* Light mode styles */
     .light-mode {
       background-color: #ffffff;
       color: #000000;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        width: 100%; /* Full width on small screens */
+        padding: 10px; /* Reduced padding for small screens */
+      }
     }
   </style>
   <body>
