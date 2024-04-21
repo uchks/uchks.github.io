@@ -85,8 +85,19 @@
       <hr />
       <sub
         >© uchks 2024 //
-        <a href="mailto:jason@waifu.club">jason@waifu.club</a></sub
+        <a href="mailto:jason@waifu.club">jason@waifu.club</a> - Last Edited: 
+        <span id="last-edited">1713665226</span></sub
       >
+      <script>
+        window.onload = function () {
+          var unixTimestamp = parseInt(
+            document.getElementById("last-edited").innerText
+          );
+          var date = new Date(unixTimestamp * 1000); // JavaScript requires milliseconds
+          document.getElementById("last-edited").innerText =
+            date.toLocaleString();
+        };
+      </script>
     </div>
     <script src="../assets/visual.js"></script>
   </body>
