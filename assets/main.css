@@ -32,10 +32,9 @@ a:hover {
 }
 code {
   display: block;
-  background-color: #1e1e1e;
   padding: 5px;
   margin: 5px 0;
-  border-left: 3px solid #333333;
+  border-left: 3px solid #333;
   color: #dcdcdc;
 }
 hr {
@@ -48,9 +47,19 @@ hr {
   color: #ffffff;
 }
 
+.dark-mode code {
+  background-color: #1e1e1e;
+}
+
 .light-mode {
   background-color: #ffffff;
   color: #000000;
+}
+
+.light-mode code {
+  background-color: #f5f5f5;
+  color: #333333;
+  border-left-color: #cccccc;
 }
 
 @media (max-width: 600px) {
