@@ -19,6 +19,15 @@ function retrieveSFM() {
     type: "GET",
     url: "https://api.stats.fm/api/v1/users/sukarodo/streams/current",
     success: function (data) {
+      var listeningContainer = document.getElementById("listening-container");
+      var listeningLabel = document.getElementById("listening-label");
+
+      if (data.item === null) {
+        listeningContainer.style.display = "none";
+        listeningLabel.style.display = "none";
+        return;
+      }
+
       var track = data.item.track;
       var duration = parseInt(track.durationMs);
       var current = parseInt(data.item.progressMs);
@@ -29,9 +38,6 @@ function retrieveSFM() {
       document.getElementById("artist").innerHTML = "by " + thingforshortershit(track.artists[0].name, 18);
       document.getElementById("album").innerHTML = "on " + thingforshortershit(track.albums[0].name, 18);
       document.getElementById("cover").src = track.albums[0].image;
-
-      var listeningContainer = document.getElementById("listening-container");
-      var listeningLabel = document.getElementById("listening-label");
 
       listeningContainer.style.display = "inline-block";
       listeningLabel.style.display = "inline-block";
@@ -44,11 +50,8 @@ function retrieveSFM() {
       listeningContainer.style.cursor = "pointer";
     },
     error: function (error) {
-      if (error.status !== 404) {
-        console.log(error.status);
-        document.getElementById("listening-container").style.display = "none";
-        document.getElementById("listening-label").style.display = "none";
-      }
+      document.getElementById("listening-container").style.display = "none";
+      document.getElementById("listening-label").style.display = "none";
     }
   });
 }
