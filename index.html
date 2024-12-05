@@ -1,52 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>uchks</title>
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="uchks" />
-    <meta property="og:description" content="writeups." />
-    <meta name="author" content="uchks" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css"
-    />
-    <link rel="stylesheet" href="assets/main.css" />
-  </head>
-  <body>
-    <div class="content">
-      <h5>
-        Articles get updated often; look for the "Last Edited:" date at the
-        footer of every article. Furthermore, I do store
-        <strong>1 (one)</strong> cookie for light mode v. dark mode users.
-        Transparency.
-      </h5>
-      <p style="display:none">
-        20/04/2024 -
-        <a href="/articles/piracy.html"
-          >The Last Piracy Guide You'll Ever Need - WIP</a
-        >
-      </p>
-      <p>
-        18/04/2024 - <a href="/articles/dxvkongtav">dxvk on GTA V (guide)</a>
-      </p>
-      <p>
-        13/04/2024 -
-        <a href="/articles/dxvkonwindows">dxvk on Windows (guide)</a>
-      </p>
-      <hr />
-      <sub
-        ><a href="https://x.com/pureimbalance">x</a>
-        <a href="https://github.com/uchks">github</a>
-        <a href="https://discord.gg/QKfhxZpZDu">discord</a></sub
-      >
-      <br />
-      <sub
-        >© uchks 2024 //
-        <a href="mailto:jason@air.rip">jason@air.rip</a></sub
-      >
+    <link rel="preload" href="assets/sky.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="https://files.catbox.moe/kv2ky6.flac" as="audio">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/jquery4/jquery4/dist/jquery4.min.js" defer></script>
+    <script src="assets/js/lastfm.js" defer></script>
+    <script src="assets/js/discord.js" defer></script>
+    <script src="assets/js/audio.js" defer></script>
+</head>
+
+<body>
+    <div>
+        <video id="background-video" autoplay muted loop>
+            <source src="assets/sky.mp4" type="video/mp4">
+        </video>
     </div>
-    <script src="assets/visual.js"></script>
-  </body>
+    <div id="overlay">
+        <audio loop src="https://files.catbox.moe/kv2ky6.flac" id="audio"></audio>
+        <canvas id="canvas"></canvas>
+        <div class="card">
+            <div class="banner"></div>
+            <img id="avatar" class="pfp" draggable="false" src="">
+            <div class="presence" id="presence"></div>
+            <div class="card2">
+                <h1 class="displayname" id="displayname">uchks</h1>
+                <h1 class="username" id="username">@uchks</h1>
+                <h3 id="status-label" class="status-label"><i>Working on manilua</i></h3>
+                <hr class="line">
+                <h3 id="bio" class="bio-label">ABOUT ME</h3>
+                <h2 class="bio" id="biotxt">
+                    21. <br>
+                    <a href="https://anilist.co/user/uchks">https://anilist.co/user/uchks</a> <br>
+                    <a href="https://www.piracybound.com/discord">https://www.piracybound.com/discord</a>
+                </h2>
+
+                <h3 id="listening-label" class="listening-container">LISTENING TO SPOTIFY</h3>
+                <div class="container">
+                    <div id="listening-container">
+                        <div id="listening-label"></div>
+                        <div id="cover-container" class="info">
+                            <img id="cover" src="" alt="">
+                            <div id="song-info">
+                                <div id="title"></div>
+                                <div id="artist"></div>
+                                <div id="album"></div>
+                            </div>
+                        </div>
+                        <div id="progress-wrapper">
+                            <progress id="prog" value="0" max="100"></progress>
+                        </div>
+                    </div>
+                </div>
+                <div class="icons">
+                    <a href="https://x.com/pureimbalance" target="_blank"><i
+                            class="fa-brands fa-x-twitter fa-2x"></i></a>
+                    <a href="https://github.com/uchks" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>
+                    <a href="https://discord.com/users/326237293612367873" target="_blank"><i
+                            class="fa-brands fa-discord fa-2x"></i></a>
+                    <a href="https://t.me/uchks" target="_blank"><i class="fa-brands fa-telegram fa-2x"></i></a>
+                    <a href="/articles"><i class="fa-solid fa-newspaper fa-2x"></i></a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.card');
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const tiltX = (e.clientY - centerY) / 20;
+                const tiltY = -(e.clientX - centerX) / 20;
+
+                card.style.setProperty('--tilt-x', `${tiltX}deg`);
+                card.style.setProperty('--tilt-y', `${tiltY}deg`);
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--tilt-x', '0deg');
+                card.style.setProperty('--tilt-y', '0deg');
+            });
+        });
+    </script>
+</body>
+
 </html>

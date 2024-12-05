@@ -1,104 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>uchks</title>
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="uchks" />
-    <meta property="og:description" content="writeups." />
-    <meta name="author" content="uchks" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css"
-    />
-    <link rel="stylesheet" href="../assets/main.css" />
-  </head>
-  <body>
-    <div class="content">
-      <h5><a href="javascript:history.back()"><- Back</a> 13/04/2024</h5>
-      <h2>dxvk on GTA V</h2>
-      <p>
-        Grand Theft Auto V isn't typically compatible with DXVK when running on
-        Windows, but we're here to change that. With a few straightforward
-        steps, you'll have Grand Theft Auto V running under Vulkan in no time.
-      </p>
-      <h3>Pre-requisites:</h3>
-      <ul>
-        <li>Windows</li>
-        <li>
-          <a href="https://gitlab.com/Ph42oN/dxvk-gplasync/-/releases"
-            >dxvk-gplasync</a
-          >
-          - DXVK files
-        </li>
-        <li>
-          <a href="https://ntcore.com/explorer-suite/">CFF Explorer</a> - to
-          modify DLL files
-        </li>
-      </ul>
-      <p>
-        Using CFF Explorer, we will modify a DLL file to utilize imports from
-        DXVK. There have been reports of success with two different DLLs:
-      </p>
-      <code
-        >d3dcompiler_46.dll - Bundled with Grand Theft Auto V<br />D3DCompiler_43.dll
-        - Bundled with Windows (System32 directory)</code
-      >
-      <p>
-        <strong>Tip:</strong> Try this guide with <strong>both</strong> DLLs to
-        determine which works best for you. In this example, I'll use
-        <strong>D3DCompiler_43.dll</strong>, which was successful in my tests.
-      </p>
-      <ol>
-        <li>
-          Navigate to your System32 folder at C:/Windows/System32. Copy the
-          <strong>D3DCompiler_43.dll</strong> (if using d3dcompiler_46.dll, skip
-          this step).
-        </li>
-        <li>
-          Access the Grand Theft Auto V directory by opening Steam,
-          right-clicking on Grand Theft Auto V, selecting "Manage," then "Browse
-          local files." Here,
-          <strong>delete d3dcompiler_46.dll</strong> (if using
-          D3DCompiler_43.dll, otherwise skip) and paste the copied
-          D3DCompiler_43.dll.
-        </li>
-        <li>
-          Also, copy
-          <strong>d3d11.dll</strong> and <strong>dxgi.dll</strong> from the DXVK
-          package and paste them into the Grand Theft Auto V directory.
-        </li>
-        <li>
-          Open CFF Explorer and use the "Open" icon to load D3DCompiler_43.dll
-          from the Grand Theft Auto V folder. Navigate to
-          <strong>Import Adder</strong> and click Add. Import all exported
-          functions from the DXVK DLLs (d3d11.dll, dxgi.dll) by name, one at a
-          time. Once all functions are imported, click "Rebuild Import Table."
-        </li>
-        <li>Go to the file menu, save, and overwrite the original DLL file.</li>
-        <li>
-          Start Grand Theft Auto V, ensure your DirectX version is set to 11,
-          and enjoy the game.
-        </li>
-      </ol>
-      <hr />
-      <sub
-        >© uchks 2024 //
-        <a href="mailto:jason@waifu.club">jason@waifu.club</a> - Last Edited:
-        <span id="last-edited">1713665226</span></sub
-      >
-      <script>
-        window.onload = function () {
-          var unixTimestamp = parseInt(
-            document.getElementById("last-edited").innerText
-          );
-          var date = new Date(unixTimestamp * 1000); // JavaScript requires milliseconds
-          document.getElementById("last-edited").innerText =
-            date.toLocaleString();
-        };
-      </script>
-    </div>
-    <script src="../assets/visual.js"></script>
-  </body>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>uchks</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="uchks" />
+  <meta property="og:description" content="writeups." />
+  <meta name="author" content="uchks" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css" />
+  <link rel="stylesheet" href="../articles/assets/main.css" />
+</head>
+
+<body>
+  <div class="content">
+    <h5><a href="javascript:history.back()"><- Back</a> 13/04/2024</h5>
+    <h2>dxvk on GTA V</h2>
+    <p>
+      Grand Theft Auto V isn't typically compatible with DXVK when running on
+      Windows, but we're here to change that. With a few straightforward
+      steps, you'll have Grand Theft Auto V running under Vulkan in no time.
+    </p>
+    <h3>Pre-requisites:</h3>
+    <ul>
+      <li>Windows</li>
+      <li>
+        <a href="https://gitlab.com/Ph42oN/dxvk-gplasync/-/releases">dxvk-gplasync</a>
+        - DXVK files
+      </li>
+      <li>
+        <a href="https://ntcore.com/explorer-suite/">CFF Explorer</a> - to
+        modify DLL files
+      </li>
+    </ul>
+    <p>
+      Using CFF Explorer, we will modify a DLL file to utilize imports from
+      DXVK. There have been reports of success with two different DLLs:
+    </p>
+    <code>d3dcompiler_46.dll - Bundled with Grand Theft Auto V<br />D3DCompiler_43.dll
+        - Bundled with Windows (System32 directory)</code>
+    <p>
+      <strong>Tip:</strong> Try this guide with <strong>both</strong> DLLs to
+      determine which works best for you. In this example, I'll use
+      <strong>D3DCompiler_43.dll</strong>, which was successful in my tests.
+    </p>
+    <ol>
+      <li>
+        Navigate to your System32 folder at C:/Windows/System32. Copy the
+        <strong>D3DCompiler_43.dll</strong> (if using d3dcompiler_46.dll, skip
+        this step).
+      </li>
+      <li>
+        Access the Grand Theft Auto V directory by opening Steam,
+        right-clicking on Grand Theft Auto V, selecting "Manage," then "Browse
+        local files." Here,
+        <strong>delete d3dcompiler_46.dll</strong> (if using
+        D3DCompiler_43.dll, otherwise skip) and paste the copied
+        D3DCompiler_43.dll.
+      </li>
+      <li>
+        Also, copy
+        <strong>d3d11.dll</strong> and <strong>dxgi.dll</strong> from the DXVK
+        package and paste them into the Grand Theft Auto V directory.
+      </li>
+      <li>
+        Open CFF Explorer and use the "Open" icon to load D3DCompiler_43.dll
+        from the Grand Theft Auto V folder. Navigate to
+        <strong>Import Adder</strong> and click Add. Import all exported
+        functions from the DXVK DLLs (d3d11.dll, dxgi.dll) by name, one at a
+        time. Once all functions are imported, click "Rebuild Import Table."
+      </li>
+      <li>Go to the file menu, save, and overwrite the original DLL file.</li>
+      <li>
+        Start Grand Theft Auto V, ensure your DirectX version is set to 11,
+        and enjoy the game.
+      </li>
+    </ol>
+    <hr />
+    <sub>© uchks 2024 //
+      <a href="mailto:jason@piracybound.com">jason@piracybound.com</a> - Last Edited:
+      <span id="last-edited">1713665226</span></sub>
+    <script>
+      window.onload = function () {
+        var unixTimestamp = parseInt(
+          document.getElementById("last-edited").innerText
+        );
+        var date = new Date(unixTimestamp * 1000);
+        document.getElementById("last-edited").innerText =
+          date.toLocaleString();
+      };
+    </script>
+  </div>
+  <script src="../articles/assets/visual.js"></script>
+</body>
+
 </html>
