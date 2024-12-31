@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uchks</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="uchks" />
+    <meta property="og:description" content="writeups." />
+    <meta name="author" content="uchks" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css" />
+    <link rel="stylesheet" href="../articles/assets/main.css" />
+</head>
+
+<body>
+    <div class="content">
+        <h5><a href="javascript:history.back()"><- Back</a> 31/12/2024</h5>
+        <h2>Updating XeSS, DLSS, and FSR (3.1+)</h2>
+        <p>
+            Boost your gaming performance by replacing outdated DLLs for Intel XeSS, NVIDIA DLSS, and AMD FSR with their
+            latest versions. This guide will walk you through the process for each upscaling technology.
+        </p>
+
+        <h3>1. Intel XeSS (Xe Super Sampling)</h3>
+        <p>
+            Download the latest XeSS SDK to get the most up-to-date DLL files for Intel's upscaling technology.
+        </p>
+        <ol>
+            <li>
+                <strong>Download the Latest XeSS SDK:</strong>
+                <ul>
+                    <li><a href="https://github.com/intel/xess/releases/latest">Intel XeSS SDK</a> - DLLs are located in
+                        the 'bin' directory</li>
+                    <li><a href="https://github.com/uchks/xess/releases/latest">Intel XeSS 2.0 SDK</a> - <em>Note: Will
+                            be removed once Intel updates their GitHub</em></li>
+                </ul>
+            </li>
+            <li>
+                <strong>Replace DLL Files:</strong>
+                <p>Find the existing DLLs in your game folder and overwrite them:</p>
+                <ul>
+                    <li><code>libxess.dll</code> - Super Resolution</li>
+                    <li><code>libxess_fg.dll</code> - Frame Generation (not used <em>yet</em>)</li>
+                    <li><code>libxell.dll</code> - Low Latency (not used <em>yet</em>)</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>2. NVIDIA DLSS (Deep Learning Super Sampling)</h3>
+        <ol>
+            <li>
+                <strong>Download the Latest DLSS DLLs:</strong>
+                <ul>
+                    <li><a href="https://www.techpowerup.com/download/nvidia-dlss-dll/">DLSS Super Resolution</a></li>
+                    <li><a href="https://www.techpowerup.com/download/nvidia-dlss-3-frame-generation-dll/">DLSS Frame
+                            Generation</a></li>
+                    <li><a href="https://www.techpowerup.com/download/nvidia-dlss-3-ray-reconstruction-dll/">DLSS Ray
+                            Reconstruction</a></li>
+                </ul>
+            </li>
+            <li>
+                <strong>Replace DLL Files:</strong>
+                <p>Overwrite the existing DLLs in your game directory:</p>
+                <ul>
+                    <li><code>nvngx_dlss.dll</code> - Super Resolution</li>
+                    <li><code>nvngx_dlssg.dll</code> - Frame Generation</li>
+                    <li><code>nvngx_dlssd.dll</code> - Ray Reconstruction</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>3. AMD FSR (FidelityFX Super Resolution)</h3>
+        <p>
+            <strong>Important:</strong> FSR 1, 2, or 3.0 cannot be updated to 3.1+. This guide applies only to 3.1 and
+            newer versions.
+        </p>
+        <ol>
+            <li>
+                <strong>Download the Latest FSR SDK:</strong>
+                <ul>
+                    <li><a href="https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/releases/latest">AMD
+                            FidelityFX SDK</a> - DLLs are located in the 'bin' directory</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Replace DLL Files:</strong>
+                <p>Locate and replace the existing DLLs (if they exist):</p>
+                <ul>
+                    <li><code>amd_fidelityfx_dx12.dll</code> - DirectX 12</li>
+                    <li><code>amd_fidelityfx_vk.dll</code> - Vulkan</li>
+                </ul>
+            </li>
+        </ol>
+
+        <hr />
+        <sub>© uchks 2024 //
+            <a href="mailto:jason@piracybound.com">jason@piracybound.com</a> - Last Edited:
+            <span id="last-edited">1735676070</span></sub>
+        <script>
+            window.onload = function () {
+                var unixTimestamp = parseInt(
+                    document.getElementById("last-edited").innerText
+                );
+                var date = new Date(unixTimestamp * 1000);
+                document.getElementById("last-edited").innerText =
+                    date.toLocaleString();
+            };
+        </script>
+    </div>
+    <script src="../articles/assets/visual.js"></script>
+</body>
+
+</html>

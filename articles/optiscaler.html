@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uchks</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="uchks" />
+    <meta property="og:description" content="writeups." />
+    <meta name="author" content="uchks" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css" />
+    <link rel="stylesheet" href="../articles/assets/main.css" />
+</head>
+
+<body>
+    <div class="content">
+        <h5><a href="javascript:history.back()"><- Back</a> 31/12/2024</h5>
+        <h2>OptiScaler Installation Guide</h2>
+        <p>
+            <strong>Important:</strong> Do not use this mod in online games! It could trigger anti-cheat software and
+            lead to bans.
+        </p>
+
+        <h3>Install as non-nvngx (Enables all Features)</h3>
+        <ol>
+            <li>
+                <strong>Download OptiScaler:</strong>
+                <ul>
+                    <li>Go to the <a href="https://github.com/cdozdil/OptiScaler/releases">Releases page</a> and
+                        download the latest version</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Find the nvngx_dlss.dll file:</strong>
+                <p>Go to your game's installation folder and look for a file named nvngx_dlss.dll. It's typically
+                    located in:</p>
+                <ul>
+                    <li>For Unreal Engine games: <code>&lt;path-to-game&gt;\Binaries\Win64\</code></li>
+                    <li>Other games may store it in folders like <code>plugins</code></li>
+                </ul>
+                <p>If the file isn't in the main folder, search for it elsewhere.</p>
+            </li>
+            <li>
+                <strong>Make a copy of nvngx_dlss.dll:</strong>
+                <ul>
+                    <li>Copy the file to the same folder</li>
+                    <li>Rename the copied file to <code>nvngx.dll</code></li>
+                </ul>
+            </li>
+            <li>
+                <strong>Prepare the OptiScaler mod:</strong>
+                <p>Download the OptiScaler mod and locate its nvngx.dll file. Rename the mod's nvngx.dll to one of these
+                    supported filenames (recommended: dxgi.dll):</p>
+                <ul>
+                    <li><code>dxgi.dll</code></li>
+                    <li><code>winmm.dll</code></li>
+                    <li><code>version.dll</code></li>
+                    <li><code>wininet.dll</code></li>
+                    <li><code>winhttp.dll</code></li>
+                    <li><code>OptiScaler.asi</code> (if using an ASI loader)</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Install the OptiScaler mod:</strong>
+                <p>Place the renamed OptiScaler DLL into your game's main executable folder (where the .exe file is
+                    located).</p>
+            </li>
+            <li>
+                <strong>For non-Nvidia GPUs:</strong>
+                <p>Check the GPU spoofing options for additional setup instructions.</p>
+            </li>
+        </ol>
+
+        <h3>Compatibility with Other Mods</h3>
+        <p>
+            If you use another mod like Reshade that also relies on <strong>dxgi.dll</strong>, you have two options:
+        </p>
+        <ul>
+            <li>Rename the original file to something like <strong>dxgi-original.dll</strong> OptiScaler will load it
+                automatically.</li>
+            <li>Create a folder named <strong>plugins</strong> in the game directory and move the conflicting mod files
+                there. OptiScaler will check this folder and load them as needed.</li>
+        </ul>
+        <p>
+            <strong>Important:</strong> Do not rename the <strong>nvngx.ini</strong> file! It must remain
+            <strong>nvngx.ini</strong>.
+        </p>
+        <p>
+            Press the <strong>Insert</strong> Key to activate the Overlay Menu.
+        </p>
+
+        <h3>Install as nvngx.dll (Limited features)</h3>
+        <p>
+            Note: This installation method will disable Frame Generation and the Overlay Menu.
+        </p>
+        <ol>
+            <li>
+                <strong>Download OptiScaler:</strong>
+                <ul>
+                    <li>Go to the <a href="https://github.com/cdozdil/OptiScaler/releases">Releases page</a> and
+                        download the latest version</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Extract the files:</strong>
+                <ul>
+                    <li>Unzip the downloaded archive</li>
+                    <li>Copy the contents into your game's main executable folder <br> (e.g. for Unreal Engine games)
+                        <code>&lt;path-to-game&gt;\Binaries\Win64\</code></li>
+                </ul>
+            </li>
+            <li>
+                <strong>Enable Signature Override:</strong>
+                <ul>
+                    <li>Open the <strong>DlssOverrides</strong> folder</li>
+                    <li>Run the file <strong>EnableSignatureOverride.reg</strong> and confirm when asked</li>
+                </ul>
+            </li>
+            <li>
+                <strong>For non-Nvidia GPUs:</strong>
+                <ul>
+                    <li>Follow the <a href="https://github.com/cdozdil/OptiScaler/blob/master/Spoofing.md">GPU spoofing
+                            options guide</a></li>
+                </ul>
+            </li>
+        </ol>
+        <p>
+            <strong>Warning:</strong> This version may overwrite the <strong>libxess.dll</strong> file if it already
+            exists in the game folder. Back up any important files first.
+        </p>
+
+        <hr />
+        <sub>© uchks 2024 //
+            <a href="mailto:jason@piracybound.com">jason@piracybound.com</a> - Last Edited:
+            <span id="last-edited">1735676070</span></sub>
+        <script>
+            window.onload = function () {
+                var unixTimestamp = parseInt(
+                    document.getElementById("last-edited").innerText
+                );
+                var date = new Date(unixTimestamp * 1000);
+                document.getElementById("last-edited").innerText =
+                    date.toLocaleString();
+            };
+        </script>
+    </div>
+    <script src="../articles/assets/visual.js"></script>
+</body>
+
+</html>
