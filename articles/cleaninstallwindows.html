@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>uchks</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="uchks" />
+  <meta property="og:description" content="writeups." />
+  <meta name="author" content="uchks" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/uchks/ggcdn@master/ggsans.css" />
+  <link rel="stylesheet" href="../articles/assets/main.css" />
+</head>
+
+<body>
+  <div class="content">
+    <h5><a href="javascript:history.back()"><- Back</a> 31/12/2024</h5>
+    <h2>Clean Windows Installation Guide</h2>
+    <p>
+      A comprehensive guide for performing a clean Windows installation, including malware checks, data backup, and post-installation optimization steps.
+    </p>
+
+    <h3>Prerequisites</h3>
+    <ul>
+      <li>
+        A genuine Windows ISO file:
+        <ul>
+          <li><a href="https://oemsoc.download.prss.microsoft.com/dbazure/X23-81951_26100.1742.240906-0331.ge_release_svc_refresh_CLIENT_ENTERPRISES_OEM_x64FRE_en-us.iso_640de540-87c4-427f-be87-e6d53a3a60b4?t=2c3b664b-b119-4088-9db1-ccff72c6d22e&P1=102816950270&P2=601&P3=2&P4=OC448onxqdmdUsBUApAiE8pj1FZ%2bEPTU3%2bC6Quq29MVwMyyDUtR%2fsbiy7RdVoZOHaZRndvzeOOnIwJZ2x3%2bmP6YK9cjJSP41Lvs0SulF4SVyL5C0DdDmiWqh2QW%2bcDPj2Xp%2bMrI9NOeElSBS5kkOWP8Eiyf2VkkQFM3g5vIk3HJVvu5sWo6pFKpFv4lML%2bHaIiTSuwbPMs5xwEQTfScuTKfigNlUZPdHRMp1B3uKLgIA3r0IbRpZgHYMXEwXQ%2fSLMdDNQthpqQvz1PThVkx7ObD55CXgt0GNSAWRfjdURWb8ywWk1gT7ozAgpP%2fKNm56U5nh33WZSuMZIuO1SBM2vw%3d%3d">Windows 11 IoT Enterprise LTSC 24H2</a> (Recommended)</li>
+          <li><a href="https://drive.massgrave.dev/en-us_windows_11_iot_enterprise_version_23h2_x64_dvd_fb37549c.iso">Windows 11 IoT Enterprise 23H2</a> (For cracked Denuvo games)</li>
+        </ul>
+      </li>
+      <li>The latest version of <a href="https://rufus.ie/">Rufus</a></li>
+      <li>A minimum 8GB USB drive</li>
+      <li>Follow <a href="https://gravesoft.dev/remove_malware">this guide</a> before making a bootable USB if you suspect malware</li>
+      <li>Another clean system if your current system is infected with malware</li>
+    </ul>
+
+    <h3>Malware Concerns</h3>
+    <p>
+      <strong>Why use another system?</strong><br>
+      Malware can copy itself to the bootable USB during creation. Use a clean system to make the bootable USB and only connect it to the infected system when Windows isn't running.
+    </p>
+    <p>
+      <strong>Checking for file infector malware:</strong><br>
+      Open PowerShell as admin and enter:
+    </p>
+    <code>sc.exe start "sppsvc" > $null 2>&1; Write-Host "Error code: $LASTEXITCODE"</code>
+    <p>
+      If the output is <strong>Error code: 577</strong> or <strong>225</strong>, your system likely has file infector malware.
+    </p>
+    <p>
+      <strong>No access to a clean system?</strong><br>
+      Try <a href="https://free.drweb.com/download+cureit/gr">Dr.Web</a> to remove malware, but be aware it may miss some infections. Creating a bootable USB on a clean system remains the safest option.
+    </p>
+
+    <h3>Backing Up Your Data</h3>
+    <p>
+      A clean installation will format the C drive. Here's how to back up your data:
+    </p>
+    <p>
+      <strong>For systems with multiple partitions (C:\, D:\, etc.):</strong>
+    </p>
+    <ul>
+      <li>Copy data from C drive to other partitions</li>
+      <li>
+        Key locations to back up in <strong>C:\Users\[Your Username]</strong>:
+        <ul>
+          <li>Desktop</li>
+          <li>Documents</li>
+          <li>Downloads</li>
+          <li>Music</li>
+          <li>Pictures</li>
+          <li>Videos</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>
+      <strong>For systems with C:\ drive only:</strong>
+    </p>
+    <ul>
+      <li>For small amounts of data: Use online drives or the bootable USB</li>
+      <li>For large amounts of data: <a href="https://youtu.be/_HgjasKuOBw">Create a new partition</a> and save your data there</li>
+    </ul>
+
+    <p>
+      <strong>Recommended online backup options:</strong>
+    </p>
+    <ul>
+      <li><a href="https://drive.google.com/">GoogleDrive</a> - 15GB Free</li>
+      <li><a href="https://mega.io/">Mega</a> - 20GB Free</li>
+      <li><a href="https://onedrive.live.com/">OneDrive</a> - 5GB Free</li>
+    </ul>
+
+    <h3>Creating a Bootable USB with Rufus</h3>
+    <ol>
+      <li>Connect your USB drive (data will be erased)</li>
+      <li>Launch Rufus</li>
+      <li>Select your USB drive in the "Device" dropdown</li>
+      <li>Click "SELECT" and choose your Windows ISO file</li>
+      <li>Click "START" and wait for completion</li>
+    </ol>
+
+    <h3>Post-Installation Steps</h3>
+    <ul>
+      <li><a href="https://github.com/he3als/EdgeRemover">Remove Microsoft Edge</a></li>
+      <li><a href="https://gist.github.com/ave9858/a2153957afb053f7d0e7ffdd6c3dcb89">Disable Telemetry</a></li>
+      <li>
+        <a href="https://www.glenn.delahoy.com/snappy-driver-installer-origin/">Update your drivers</a>
+        <p>GPU Drivers:</p>
+        <ul>
+          <li><a href="https://www.amd.com/en/support/download/drivers.html">AMD</a></li>
+          <li><a href="https://www.intel.com/content/www/us/en/download-center/home.html">Intel</a></li>
+          <li><a href="https://www.nvidia.com/en-us/drivers/">NVIDIA</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <hr />
+    <sub>© uchks 2024 //
+      <a href="mailto:jason@piracybound.com">jason@piracybound.com</a> - Last Edited:
+      <span id="last-edited">1735676406</span></sub>
+    <script>
+      window.onload = function () {
+        var unixTimestamp = parseInt(
+          document.getElementById("last-edited").innerText
+        );
+        var date = new Date(unixTimestamp * 1000);
+        document.getElementById("last-edited").innerText =
+          date.toLocaleString();
+      };
+    </script>
+  </div>
+  <script src="../articles/assets/visual.js"></script>
+</body>
+
+</html>
